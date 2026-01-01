@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(172, 2, 2, 0.5), 0 0 60px rgba(190, 84, 84, 0.3);
+  }
+}
+
+@keyframes rotate-border {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gradient-slide {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 5s ease-in-out infinite;
+}
+
+.animate-rotate-border {
+  animation: rotate-border 2s linear infinite;
+}
+
+.animate-gradient-slide {
+  background-size: 200% 200%;
+  animation: gradient-slide 3s ease infinite;
+}
