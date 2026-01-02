@@ -1,80 +1,234 @@
-import Image from 'next/image'
-import React from 'react'
-import { SlUserFollow } from "react-icons/sl";
-import { AiTwotoneLike } from "react-icons/ai";
-import { FaInstagramSquare, FaGithub, FaLinkedin } from "react-icons/fa";
+"use client"
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Github, 
+  Linkedin, 
+  Instagram, 
+  MessageCircle, 
+  Mail, 
+  MapPin, 
+  Code2, 
+  Cpu, 
+  Globe,
+  Heart,
+  UserPlus,
+  ArrowLeftRight,
+  X
+} from 'lucide-react';
 import WhatsAppButton from './whatapp';
 
-const front = () => {
-  return (
-    <>
-      <div className='flex flex-col items-center p-6 rounded-2xl w-80 h-auto ' style={{
-        backgroundImage: 'url(/bg-image.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }}>
-        <div className="flex relative group">
-          <div className="absolute inset-0 rounded-full border-4 border-transparent group-hover:border-white/50 group-hover:animate-rotate-border transition-all duration-300"></div>
-          <div className="relative rounded-full animate-pulse-glow">
-            <Image src="/photos/logo.jpg" alt="Profile" width={180} height={170} className="object-cover rounded-full border-4 border-gray-500 w-[180px] h-[170px] relative z-10 transition-transform duration-300 group-hover:scale-105"></Image>
-          </div>
-        </div>
-        <div className='text-center mt-4'>
-          <h1 className="text-2xl font-bold text-white" >Mr.Harshal Patil</h1>
-          <p className="text-sm mt-4 text-white font-semibold">Computer Engineering Students</p>
-        </div>
-        <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
-          <defs>
-            <linearGradient id="igGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#ff6ec7" />
-              <stop offset="50%" stopColor="#8a2be2" />
-              <stop offset="100%" stopColor="#4facfe" />
-            </linearGradient>
-            <linearGradient id="liGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="100%" stopColor="#140D9E" />
-            </linearGradient>
-          </defs>
-        </svg>
-        <div className='mt-4 flex space-x-4'>
-          <a href="https://www.instagram.com/harshalpatil_2004" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="transition-transform duration-300 hover:scale-125 hover:drop-shadow-lg">
-            <FaInstagramSquare className="text-2xl transition-all duration-300 hover:opacity-90" style={{ fill: 'url(#igGradient)' }} />
-          </a>
-          <a href="https://github.com/HarshalPatil2004" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="transition-transform duration-300 hover:scale-125 hover:drop-shadow-lg">
-            <FaGithub className="text-2xl text-white transition-all duration-300 hover:text-gray-300" />
-          </a>
-          <a href="https://www.linkedin.com/in/harshal-patil-39999330b/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="transition-transform duration-300 hover:scale-125 hover:drop-shadow-lg">
-            <FaLinkedin className="text-2xl transition-all duration-300 hover:opacity-90" style={{ fill: 'url(#liGradient)' }} />
-          </a>
-          <div className="transition-transform duration-300 hover:scale-125">
-            <WhatsAppButton />
-          </div>
-        </div>
-        <div className='mt-6 flex space-x-4'>
-          <button className="relative px-4 py-2 gap-2 flex rounded-xl text-xl text-white backdrop-blur-md
-bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 border border-white/30
-hover:bg-white/30 transition-all duration-300 m-2 hover:-translate-y-1 hover:shadow-lg
-overflow-hidden group">
-            <span className="absolute inset-0 bg-gradient-to-r from-purple-500/40 via-pink-500/40 to-blue-500/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-gradient-slide"></span>
-            <span className="relative z-10 flex items-center gap-2">Follow<SlUserFollow /></span>
-          </button>
-          <button className="relative px-4 py-2 flex rounded-xl text-xl text-white backdrop-blur-md
-bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 border border-white/30
-hover:bg-white/30 transition-all duration-300 m-2 hover:-translate-y-1 hover:shadow-lg
-overflow-hidden group">
-            <span className="absolute inset-0 bg-gradient-to-r from-purple-500/40 via-pink-500/40 to-blue-500/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-gradient-slide"></span>
-            <span className="relative z-10 flex items-center gap-2">Like <AiTwotoneLike /></span>
-          </button>
-        </div>
-        {/*<div>
-          <button className=" px-5 py-2 mt-2 rounded-full bg-black/70 text-white
-flex items-center justify-center
-hover:bg-black transition active:scale-90">
-            Swipe ➜
-          </button>
-        </div>*/}
-      </div>
-    </>
-  )
-}
+/**
+ * ProfileCard Component
+ * A 3D flipping card with glassmorphism effects and Framer Motion animations.
+ * Uses a single-file structure as requested.
+ */
+export default function App() {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
 
-export default front
+  const handleFlip = () => setIsFlipped(!isFlipped);
+
+  const techStack = [
+    { name: 'React', color: 'bg-cyan-500/20 text-cyan-300' },
+    { name: 'Next.js', color: 'bg-zinc-500/20 text-zinc-300' },
+    { name: 'TypeScript', color: 'bg-blue-500/20 text-blue-300' },
+    { name: 'Tailwind', color: 'bg-sky-500/20 text-sky-300' },
+    { name: 'Node.js', color: 'bg-green-500/20 text-green-300' },
+    { name: 'Three.js', color: 'bg-purple-500/20 text-purple-300' },
+  ];
+
+  return (
+    <div className="min-h-screen w-full bg-[#050505] flex items-center justify-center p-6 font-sans text-zinc-100 ">
+      {/* Background Glows */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-cyan-600/20 rounded-full blur-[120px]" />
+      </div>
+
+      {/* Card Container with 3D Perspective */}
+      <div className="relative w-full max-w-[400px] h-[580px] perspective-1000">
+        <motion.div
+          className="relative w-full h-full transition-all duration-500 preserve-3d"
+          initial={false}
+          animate={{ rotateY: isFlipped ? 540 : 0 }}
+          transition={{ type: "spring", stiffness: 260, damping: 20 }}
+        >
+          {/* FRONT SIDE */}
+          <div className={`absolute inset-0 w-full h-full backface-hidden ${isFlipped ? 'pointer-events-none' : ''}`}>
+            <div className="relative w-full h-full rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl overflow-hidden flex flex-col p-8 group">
+              {/* Decorative Glow */}
+              <div className="absolute -top-24 -right-24 w-48 h-48 bg-cyan-500/20 rounded-full blur-3xl group-hover:bg-cyan-500/40 transition-colors duration-500" />
+              
+              {/* Header / Avatar */}
+              <div className="relative z-10 flex flex-col items-center mt-4">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-purple-500 to-cyan-500 rounded-full blur-md opacity-50 group-hover:opacity-100 transition-opacity" />
+                  <div className="relative w-32 h-32 rounded-full border-2 border-white/20 overflow-hidden bg-zinc-800">
+                    <img 
+                      src="https://api.dicebear.com/7.x/avataaars/svg?seed=Harshal" 
+                      alt="Avatar" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="absolute bottom-1 right-1 w-6 h-6 bg-green-500 border-4 border-[#1a1a1a] rounded-full" />
+                </div>
+
+                <h1 className="mt-6 text-2xl font-bold tracking-tight text-white">
+                  Mr. Harshal Patil
+                </h1>
+                <p className="text-cyan-400 font-medium text-sm mt-1 uppercase tracking-widest">
+                  Computer Engineering Student
+                </p>
+              </div>
+
+              {/* Social Links */}
+              <div className="mt-10 flex justify-center gap-4">
+                {[
+                  { icon: <Instagram size={20} />, label: 'Instagram', color: 'hover:text-pink-500' },
+                  { icon: <Github size={20} />, label: 'GitHub', color: 'hover:text-white' },
+                  { icon: <Linkedin size={20} />, label: 'LinkedIn', color: 'hover:text-blue-500' }
+                ].map((social, i) => (
+                  <button 
+                    key={i}
+                    className={`p-3 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 hover:scale-110 hover:bg-white/10 ${social.color}`}
+                    title={social.label}
+                  >
+                    {social.icon}
+                  </button>
+                ))}
+                <div 
+                  className="p-3 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 hover:scale-110 hover:bg-white/10 hover:text-green-500"
+                  title="WhatsApp"
+                >
+                  <WhatsAppButton />
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="mt-auto space-y-3">
+                <div className="flex gap-3">
+                  <button className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold transition-all shadow-lg shadow-purple-900/20 active:scale-95">
+                    <UserPlus size={18} />
+                    Follow
+                  </button>
+                  <button 
+                    onClick={(e) => { e.stopPropagation(); setIsLiked(!isLiked); }}
+                    className={`px-4 rounded-xl border border-white/10 transition-all active:scale-95 flex items-center justify-center ${isLiked ? 'bg-red-500/20 text-red-500 border-red-500/30' : 'bg-white/5 text-white hover:bg-white/10'}`}
+                  >
+                    <Heart size={18} fill={isLiked ? "currentColor" : "none"} />
+                  </button>
+                </div>
+                
+                <button 
+                  onClick={handleFlip}
+                  className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-white/10 bg-white/5 text-zinc-300 hover:bg-white/10 hover:text-white transition-all group/btn"
+                >
+                  <ArrowLeftRight size={16} className="group-hover/btn:rotate-180 transition-transform duration-500" />
+                  View About Me
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* BACK SIDE */}
+          <div className={`absolute inset-0 w-full h-full backface-hidden rotate-y-180 ${!isFlipped ? 'pointer-events-none' : ''}`}>
+            <div className="relative w-full h-full rounded-3xl border border-white/10 bg-[#0a0a0a]/80 backdrop-blur-2xl shadow-2xl overflow-hidden flex flex-col p-8">
+              {/* Close Button */}
+              <button 
+                onClick={handleFlip}
+                className="absolute top-6 right-6 p-2 rounded-full bg-white/5 border border-white/10 text-zinc-400 hover:text-white hover:bg-white/10 transition-all"
+              >
+                <X size={20} />
+              </button>
+
+              <div className="mt-4">
+                <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                  <span className="w-8 h-1 bg-purple-500 rounded-full" />
+                  About Me
+                </h2>
+                <p className="mt-4 text-zinc-400 leading-relaxed text-sm">
+                  Passionate Computer Engineering student focused on building immersive web experiences. 
+                  I love turning complex problems into elegant, user-friendly solutions. 
+                  Always learning, always coding.
+                </p>
+              </div>
+
+              {/* Tech Stack */}
+              <div className="mt-8">
+                <h3 className="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-4 flex items-center gap-2">
+                  <Code2 size={14} />
+                  Tech Stack
+                </h3>
+                <div className="grid grid-cols-3 gap-2">
+                  {techStack.map((tech, i) => (
+                    <span 
+                      key={i} 
+                      className={`text-[10px] py-1.5 px-2 rounded-lg font-bold text-center border border-white/5 ${tech.color}`}
+                    >
+                      {tech.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Stats/Contact */}
+              <div className="mt-8 space-y-4">
+                <h3 className="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2 flex items-center gap-2">
+                  <Cpu size={14} />
+                  Quick Info
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3 text-sm text-zinc-300 group/info">
+                    <div className="p-2 rounded-lg bg-white/5 text-cyan-400 group-hover/info:bg-cyan-400/10 transition-colors">
+                      <Mail size={16} />
+                    </div>
+                    <span>hello@harshal.dev</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-sm text-zinc-300 group/info">
+                    <div className="p-2 rounded-lg bg-white/5 text-purple-400 group-hover/info:bg-purple-400/10 transition-colors">
+                      <MapPin size={16} />
+                    </div>
+                    <span>Pune, Maharashtra, IN</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-sm text-zinc-300 group/info">
+                    <div className="p-2 rounded-lg bg-white/5 text-indigo-400 group-hover/info:bg-indigo-400/10 transition-colors">
+                      <Globe size={16} />
+                    </div>
+                    <span>harshalpatil.me</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-auto">
+                <button 
+                  onClick={handleFlip}
+                  className="w-full py-3 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:bg-white/10 transition-all font-medium text-sm"
+                >
+                  Flip Back
+                </button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Tailwind helper styles for 3D flip */}
+      <style>{`
+        .perspective-1000 {
+          perspective: 1000px;
+        }
+        .preserve-3d {
+          transform-style: preserve-3d;
+        }
+        .backface-hidden {
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+          transform: rotateY(180deg);
+        }
+      `}</style>
+    </div>
+  );
+}

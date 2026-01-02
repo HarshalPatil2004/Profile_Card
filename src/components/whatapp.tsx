@@ -1,9 +1,13 @@
-4
 import { FaWhatsapp } from 'react-icons/fa6'; // Popular icon library
 import Link from 'next/link';
 import React from 'react';
 
-export default function WhatsAppButton() {
+interface WhatsAppButtonProps {
+  size?: number;
+  className?: string;
+}
+
+export default function WhatsAppButton({ size = 20, className = "" }: WhatsAppButtonProps) {
   const rawNumber = "8767039316";
   const defaultCountryCode = "91"; // Change if you need a different default
 
@@ -27,9 +31,9 @@ export default function WhatsAppButton() {
       href={waUrl} 
       target="_blank" 
       rel="noopener noreferrer"
-      className="whatsapp-icon"
+      className={`whatsapp-icon text-zinc-300 hover:text-green-500 transition-colors duration-300 flex items-center justify-center ${className}`}
     >
-      <FaWhatsapp size={25} color="#25D366" />
+      <FaWhatsapp size={size} />
     </Link>
   );
 }
