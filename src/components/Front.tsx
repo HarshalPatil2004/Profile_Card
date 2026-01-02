@@ -72,7 +72,8 @@ export default function App() {
                       width={112} 
                       height={112}
                       className="w-full h-full object-cover"
-                    />
+                    />  
+                    
                   </div>
                   <div className="absolute bottom-1 right-1 w-6 h-6 bg-green-500 border-4 border-[#1a1a1a] rounded-full" />
                 </div>
