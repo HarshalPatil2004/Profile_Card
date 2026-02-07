@@ -2,15 +2,15 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Github, 
-  Linkedin, 
-  Instagram, 
-  MessageCircle, 
-  Mail, 
-  MapPin, 
-  Code2, 
-  Cpu, 
+import {
+  Github,
+  Linkedin,
+  Instagram,
+  MessageCircle,
+  Mail,
+  MapPin,
+  Code2,
+  Cpu,
   Phone,
   Heart,
   UserPlus,
@@ -60,20 +60,20 @@ export default function App() {
             <div className="relative w-full h-full rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl overflow-y-auto overflow-x-hidden flex flex-col p-6 group">
               {/* Decorative Glow */}
               <div className="absolute -top-24 -right-24 w-48 h-48 bg-cyan-500/20 rounded-full blur-3xl group-hover:bg-cyan-500/40 transition-colors duration-500" />
-              
+
               {/* Header / Avatar */}
               <div className="relative z-10 flex flex-col items-center mt-2 mb-4">
                 <div className="relative">
                   <div className="absolute inset-0 bg-gradient-to-tr from-purple-500 to-cyan-500 rounded-full blur-md opacity-50 group-hover:opacity-100 transition-opacity" />
                   <div className="relative w-28 h-28 rounded-full border-2 border-white/20 overflow-hidden bg-zinc-800">
-                    <Image 
-                      src="/photos/logo.jpg" 
-                      alt="Avatar" 
-                      width={112} 
+                    <Image
+                      src="/photos/logo.jpg"
+                      alt="Avatar"
+                      width={112}
                       height={112}
                       className="w-full h-full object-cover"
-                    />  
-                    
+                    />
+
                   </div>
                   <div className="absolute bottom-1 right-1 w-6 h-6 bg-green-500 border-4 border-[#1a1a1a] rounded-full" />
                 </div>
@@ -89,25 +89,48 @@ export default function App() {
               {/* Social Links */}
               <div className="mt-6 flex justify-center gap-3 mb-4">
                 {[
-                  { icon: <Instagram size={20} />, label: 'Instagram', color: 'hover:text-pink-500' },
-                  { icon: <Github size={20} />, label: 'GitHub', color: 'hover:text-white' },
-                  { icon: <Linkedin size={20} />, label: 'LinkedIn', color: 'hover:text-blue-500' }
+                  {
+                    icon: <Instagram size={20} />,
+                    label: 'Instagram',
+                    color: 'hover:text-pink-500',
+                    link: 'https://www.instagram.com/harshalpatil_2004?igsh=czYxM3FsMDdkMW1q',
+                  },
+                  {
+                    icon: <Github size={20} />,
+                    label: 'GitHub',
+                    color: 'hover:text-white',
+                    link: 'https://github.com/HarshalPatil2004',
+                  },
+                  {
+                    icon: <Linkedin size={20} />,
+                    label: 'LinkedIn',
+                    color: 'hover:text-blue-500',
+                    link: 'https://www.linkedin.com/in/harshal-patil-39999330b/',
+                  },
                 ].map((social, i) => (
-                  <button 
+                  <a
                     key={i}
-                    className={`p-3 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 hover:scale-110 hover:bg-white/10 ${social.color}`}
+                    href={social.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}   // ⭐ IMPORTANT
                     title={social.label}
+                    className={`p-3 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 hover:scale-110 hover:bg-white/10 ${social.color}`}
                   >
                     {social.icon}
-                  </button>
+                  </a>
                 ))}
-                <div 
+
+                {/* WhatsApp Button (already working) */}
+                <div
                   className="p-3 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 hover:scale-110 hover:bg-white/10 hover:text-green-500"
                   title="WhatsApp"
                 >
                   <WhatsAppButton />
                 </div>
               </div>
+
+
 
               {/* Action Buttons */}
               <div className="mt-auto pt-4 space-y-2">
@@ -116,15 +139,15 @@ export default function App() {
                     <UserPlus size={16} />
                     Follow
                   </button>
-                  <button 
+                  <button
                     onClick={(e) => { e.stopPropagation(); setIsLiked(!isLiked); }}
                     className={`px-3 rounded-xl border border-white/10 transition-all active:scale-95 flex items-center justify-center ${isLiked ? 'bg-red-500/20 text-red-500 border-red-500/30' : 'bg-white/5 text-white hover:bg-white/10'}`}
                   >
                     <Heart size={16} fill={isLiked ? "currentColor" : "none"} />
                   </button>
                 </div>
-                
-                <button 
+
+                <button
                   onClick={handleFlip}
                   className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-white/10 bg-white/5 text-zinc-300 hover:bg-white/10 hover:text-white transition-all group/btn text-sm"
                 >
@@ -139,7 +162,7 @@ export default function App() {
           <div className={`absolute inset-0 w-full h-full backface-hidden rotate-y-180 ${!isFlipped ? 'pointer-events-none' : ''}`}>
             <div className="relative w-full h-full rounded-3xl border border-white/10 bg-[#0a0a0a]/80 backdrop-blur-2xl shadow-2xl overflow-y-auto overflow-x-hidden flex flex-col p-6">
               {/* Close Button */}
-              <button 
+              <button
                 onClick={handleFlip}
                 className="absolute top-4 right-4 z-20 p-2 rounded-full bg-white/5 border border-white/10 text-zinc-400 hover:text-white hover:bg-white/10 transition-all"
               >
@@ -152,8 +175,8 @@ export default function App() {
                   About Me
                 </h2>
                 <p className="mt-3 text-zinc-400 leading-relaxed text-xs">
-                  Passionate Computer Engineering student focused on building immersive web experiences. 
-                  I love turning complex problems into elegant, user-friendly solutions. 
+                  Passionate Computer Engineering student focused on building immersive web experiences.
+                  I love turning complex problems into elegant, user-friendly solutions.
                   Always learning, always coding.
                 </p>
               </div>
@@ -166,8 +189,8 @@ export default function App() {
                 </h3>
                 <div className="grid grid-cols-3 gap-2">
                   {techStack.map((tech, i) => (
-                    <span 
-                      key={i} 
+                    <span
+                      key={i}
                       className={`text-[9px] py-1.5 px-2 rounded-lg font-bold text-center border border-white/5 ${tech.color}`}
                     >
                       {tech.name}
@@ -205,7 +228,7 @@ export default function App() {
               </div>
 
               <div className="mt-auto pt-3">
-                <button 
+                <button
                   onClick={handleFlip}
                   className="w-full py-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:bg-white/10 transition-all font-medium text-sm"
                 >
